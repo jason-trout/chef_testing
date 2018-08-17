@@ -1,12 +1,20 @@
-Generated at 2018-08-16 01:03:57 -0500
-Errno::ENOENT: ruby_block[do_it] (cb1::test line 1) had an error: Errno::ENOENT: No such file or directory @ rb_sysopen - ~/block.rb
-/var/lib/gems/2.5.0/gems/mixlib-config-2.2.13/lib/mixlib/config.rb:63:in `read'
-/var/lib/gems/2.5.0/gems/mixlib-config-2.2.13/lib/mixlib/config.rb:63:in `from_file'
-/home/troutje/chef-repo/local-mode-cache/cache/cookbooks/cb1/recipes/test.rb:3:in `block (2 levels) in from_file'
-/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider/ruby_block.rb:31:in `block in action_run'
+Generated at 2018-08-17 05:33:34 -0500
+Mixlib::ShellOut::ShellCommandFailed: execute[logic] (cb1::logic line 1) had an error: Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
+---- Begin output of /usr/bin/ruby ~/chef_testing/logic/logic.rb 1 2 3 ----
+STDOUT: 
+STDERR: /home/troutje/chef_testing/logic/logic.rb:16: syntax error, unexpected end-of-input, expecting keyword_end
+... = m(ARGV[1], ARGV[2], ARGV[3])
+...                               ^
+---- End output of /usr/bin/ruby ~/chef_testing/logic/logic.rb 1 2 3 ----
+Ran /usr/bin/ruby ~/chef_testing/logic/logic.rb 1 2 3 returned 1
+/var/lib/gems/2.5.0/gems/mixlib-shellout-2.4.0/lib/mixlib/shellout.rb:297:in `invalid!'
+/var/lib/gems/2.5.0/gems/mixlib-shellout-2.4.0/lib/mixlib/shellout.rb:284:in `error!'
+/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/mixin/shell_out.rb:197:in `shell_out_compacted!'
+/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/mixin/shell_out.rb:124:in `shell_out!'
+/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider/execute.rb:58:in `block in action_run'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/mixin/why_run.rb:51:in `add_action'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider.rb:227:in `converge_by'
-/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider/ruby_block.rb:30:in `action_run'
+/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider/execute.rb:56:in `action_run'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider.rb:182:in `run_action'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/resource.rb:577:in `run_action'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/runner.rb:70:in `run_action'
@@ -36,14 +44,22 @@ Errno::ENOENT: ruby_block[do_it] (cb1::test line 1) had an error: Errno::ENOENT:
 /usr/local/bin/chef-solo:23:in `load'
 /usr/local/bin/chef-solo:23:in `<main>'
 
->>>> Caused by Errno::ENOENT: No such file or directory @ rb_sysopen - ~/block.rb
-/var/lib/gems/2.5.0/gems/mixlib-config-2.2.13/lib/mixlib/config.rb:63:in `read'
-/var/lib/gems/2.5.0/gems/mixlib-config-2.2.13/lib/mixlib/config.rb:63:in `from_file'
-/home/troutje/chef-repo/local-mode-cache/cache/cookbooks/cb1/recipes/test.rb:3:in `block (2 levels) in from_file'
-/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider/ruby_block.rb:31:in `block in action_run'
+>>>> Caused by Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
+---- Begin output of /usr/bin/ruby ~/chef_testing/logic/logic.rb 1 2 3 ----
+STDOUT: 
+STDERR: /home/troutje/chef_testing/logic/logic.rb:16: syntax error, unexpected end-of-input, expecting keyword_end
+... = m(ARGV[1], ARGV[2], ARGV[3])
+...                               ^
+---- End output of /usr/bin/ruby ~/chef_testing/logic/logic.rb 1 2 3 ----
+Ran /usr/bin/ruby ~/chef_testing/logic/logic.rb 1 2 3 returned 1
+/var/lib/gems/2.5.0/gems/mixlib-shellout-2.4.0/lib/mixlib/shellout.rb:297:in `invalid!'
+/var/lib/gems/2.5.0/gems/mixlib-shellout-2.4.0/lib/mixlib/shellout.rb:284:in `error!'
+/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/mixin/shell_out.rb:197:in `shell_out_compacted!'
+/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/mixin/shell_out.rb:124:in `shell_out!'
+/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider/execute.rb:58:in `block in action_run'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/mixin/why_run.rb:51:in `add_action'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider.rb:227:in `converge_by'
-/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider/ruby_block.rb:30:in `action_run'
+/var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider/execute.rb:56:in `action_run'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/provider.rb:182:in `run_action'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/resource.rb:577:in `run_action'
 /var/lib/gems/2.5.0/gems/chef-14.3.37/lib/chef/runner.rb:70:in `run_action'
