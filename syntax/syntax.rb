@@ -2,6 +2,11 @@
 
 require 'set'
 
+coverage = ARGV[0]
+if coverage.nil?
+  coverage = 'dc'
+end
+
 # BNF
 bnf = [
   '<S>::=<M>',
@@ -63,10 +68,33 @@ nonterminals.each {
 }
 puts
 
+terminals = Set[]
+nonterminals.each {
+  |k, v|
+  v.each {
+    |e| 
+    terminal = e.gsub /\<.*?\>/, ''
+    terminal = terminal.strip
+    unless terminal.empty?
+      terminal.split(' ').each {
+        |t| terminals.add(t)
+      }
+    end
+  }
+}
+
+pending_terminals = Set[]
+terminals.each {
+  |t|
+  pending_terminals.add(t)
+}
+puts 'pending terminals', pending_terminals
+
 # Generate strings
 start_time = Time.now
 strings = Set['<S>']
 prev_strings_size = strings.size
+should_continue = true
 loop do
   strings_to_add = Set[]
   puts strings
@@ -91,13 +119,25 @@ loop do
 	  }
 	  working_str.strip
   	  strings_to_add.add(working_str)
+
+	  if coverage == 'tsc' and not /\<.*?\>/.match(working_str)
+	    working_str.split(' ').each {
+	      |t|
+	      pending_terminals.delete(t)
+	    }
+	    should_continue = false if pending_terminals.size == 0
+	  end
+
+	  break unless should_continue
         }
       end
+      break unless should_continue
     }
+    break unless should_continue
   }
   strings.merge(strings_to_add)
 
-  unless strings.size == prev_strings_size
+  unless strings.size == prev_strings_size or not should_continue
     prev_strings_size = strings.size
   else
     strings_to_remove = []
@@ -120,3 +160,10 @@ strings.each {
 
 print 'Generated ', strings.size, ' strings in ' + (stop_time - start_time).to_s + 's'
 puts
+puts 'BNF', bnf
+puts
+puts 'Simplified BNF', simplified_bnf
+puts
+puts 'Nonterminal to expansions mapping', nonterminals
+puts 'Terminals', terminals
+puts 'Pending terminals', pending_terminals
